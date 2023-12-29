@@ -2,21 +2,35 @@
     <h3>
         AppSlider
     </h3>
-    <div class="card" v-for="(movie, index) in moviesList" :key="moviesList[index].id">
-        <p>{{moviesList[index].original_title}}</p>
-        <img :src="`http://image.tmdb.org/t/p/w200/${moviesList[index].poster_path}`" alt="">
-    </div>
+    
+    <SingleSlide class="card" v-for="(movie, index) in moviesList"
+        :key="moviesList[index].id"
+        :index="index"
+        :visibleSlide = "visibleSlide"
+        :title = "moviesList[index].original_title"
+        :imgSource = "`http://image.tmdb.org/t/p/w200/${moviesList[index].poster_path}`"
+    />
+    <button class="prev" @click="prevSlide">Prev</button>
+    <button class="next" @click="nextSlide">Next</button>
 </template>
 
 <script>
 import axios from 'axios';
 
+import SingleSlide from './SingleSlide.vue';
+
 export default {
     name: "AppSlider",
+
+    components: {
+        SingleSlide
+    },
 
     data() {
         return {
             moviesList: [],
+
+            visibleSlide: 0,
         }
     },
 
@@ -36,7 +50,23 @@ export default {
             .catch(function (error) {
                 console.log(error);
             });
-        }  
+        },
+        
+        nextSlide() {
+            if (this.visibleSlide >= this.moviesList.length - 1) {
+                this.visibleSlide = 0;
+            } else {
+                this.visibleSlide ++;
+            };
+        },
+
+        prevSlide() {
+            if (this.visibleSlide <= 0) {
+                this.visibleSlide = this.moviesList.length - 1;
+            } else {
+                this.visibleSlide --;
+            };
+        }
     },
 
     created() {
