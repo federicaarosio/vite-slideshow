@@ -1,7 +1,4 @@
 <template lang="">
-    <h2>
-        AppHeader
-    </h2>
 </template>
 
 <script>

@@ -1,7 +1,4 @@
 <template lang="">
-    <h2>
-        AppMain
-    </h2>
     <AppSlider />
 </template>
 

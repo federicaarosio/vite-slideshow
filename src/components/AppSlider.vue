@@ -1,8 +1,4 @@
 <template lang="">
-    <h3>
-        AppSlider
-    </h3>
-    
     <SingleSlide class="card" v-for="(movie, index) in moviesList"
         :key="moviesList[index].id"
         :index="index"
@@ -79,6 +75,35 @@ export default {
     },
 }
 </script>
-<style lang="">
+<style lang="scss">
+@use "../styles/partials/mixins" as *;
+
+button {
+    background-color: transparent;
+    font-size: 1rem;
+    padding: .2rem .4rem;
+    border: none;
+    border-radius: 10px;
+    margin-top: 1rem;
+    transform: translate(0, -50%);
+    @include flex(row, center, center)   
+}
+
+button.prev {
     
+        position: absolute;
+        top: 50%;
+        left: 30%;
+        color: #37f8ff7d;
+        border: 1px solid #37f8ff7d;
+}
+
+button.next {
+    
+    position: absolute;
+    top: 50%;
+    right: 30%;
+    color: #ff400074;
+    border: 1px solid #ff400074;
+} 
 </style>
